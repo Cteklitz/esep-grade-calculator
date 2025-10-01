@@ -34,6 +34,38 @@ func TestGetGradeB(t *testing.T) {
 	}
 }
 
+func TestGetGradeC(t *testing.T) {
+	expected_value := "C"
+
+	gradeCalculator := NewGradeCalculator()
+
+	gradeCalculator.AddGrade("open source assignment", 75, Assignment)
+	gradeCalculator.AddGrade("exam 1", 70, Exam)
+	gradeCalculator.AddGrade("essay on ai ethics", 76, Essay)
+
+	actual_value := gradeCalculator.GetFinalGrade()
+
+	if expected_value != actual_value {
+		t.Errorf("Expected GetGrade to return '%s'; got '%s' instead", expected_value, actual_value)
+	}
+}
+
+func TestGetGradeD(t *testing.T) {
+	expected_value := "D"
+
+	gradeCalculator := NewGradeCalculator()
+
+	gradeCalculator.AddGrade("open source assignment", 60, Assignment)
+	gradeCalculator.AddGrade("exam 1", 67, Exam)
+	gradeCalculator.AddGrade("essay on ai ethics", 61, Essay)
+
+	actual_value := gradeCalculator.GetFinalGrade()
+
+	if expected_value != actual_value {
+		t.Errorf("Expected GetGrade to return '%s'; got '%s' instead", expected_value, actual_value)
+	}
+}
+
 func TestGetGradeF(t *testing.T) {
 	expected_value := "F"
 
@@ -47,5 +79,31 @@ func TestGetGradeF(t *testing.T) {
 
 	if expected_value != actual_value {
 		t.Errorf("Expected GetGrade to return '%s'; got '%s' instead", expected_value, actual_value)
+	}
+}
+
+func TestGetGradeType(t *testing.T) {
+	gradeCalculator := NewGradeCalculator()
+
+	gradeCalculator.AddGrade("open source assignment", 80, Assignment)
+	gradeCalculator.AddGrade("exam 1", 81, Exam)
+	gradeCalculator.AddGrade("essay on ai ethics", 85, Essay)
+
+	actual_value := gradeCalculator.assignments[0].Type.String()
+	expected_value := "assignment"
+	if actual_value != expected_value {
+		t.Errorf("Expected Type.String() to return '%s'; got '%s' instead", expected_value, actual_value)
+	}
+
+	actual_value = gradeCalculator.exams[0].Type.String()
+	expected_value = "exam"
+	if actual_value != expected_value {
+		t.Errorf("Expected Type.String() to return '%s'; got '%s' instead", expected_value, actual_value)
+	}
+
+	actual_value = gradeCalculator.essays[0].Type.String()
+	expected_value = "essay"
+	if actual_value != expected_value {
+		t.Errorf("Expected Type.String() to return '%s'; got '%s' instead", expected_value, actual_value)
 	}
 }
