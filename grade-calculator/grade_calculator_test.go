@@ -81,3 +81,35 @@ func TestGetGradeF(t *testing.T) {
 		t.Errorf("Expected GetGrade to return '%s'; got '%s' instead", expected_value, actual_value)
 	}
 }
+
+func TestPass(t *testing.T) {
+	expected_value := "Pass"
+
+	gradeCalculator := NewGradeCalculator()
+
+	gradeCalculator.AddGrade("open source assignment", 78, Assignment)
+	gradeCalculator.AddGrade("exam 1", 80, Exam)
+	gradeCalculator.AddGrade("essay on ai ethics", 62, Essay)
+
+	actual_value := gradeCalculator.GetPassing()
+
+	if expected_value != actual_value {
+		t.Errorf("Expected GetPassing to return '%s'; got '%s' instead", expected_value, actual_value)
+	}
+}
+
+func TestFail(t *testing.T) {
+	expected_value := "Fail"
+
+	gradeCalculator := NewGradeCalculator()
+
+	gradeCalculator.AddGrade("open source assignment", 61, Assignment)
+	gradeCalculator.AddGrade("exam 1", 71, Exam)
+	gradeCalculator.AddGrade("essay on ai ethics", 62, Essay)
+
+	actual_value := gradeCalculator.GetPassing()
+
+	if expected_value != actual_value {
+		t.Errorf("Expected GetPassing to return '%s'; got '%s' instead", expected_value, actual_value)
+	}
+}
