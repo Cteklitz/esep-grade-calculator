@@ -50,6 +50,17 @@ func (gc *GradeCalculator) GetFinalGrade() string {
 	return "F"
 }
 
+
+func (gc *GradeCalculator) GetPassing() string {
+	numericalGrade := gc.calculateNumericalGrade()
+
+	if numericalGrade >= 70 {
+		return "Pass"
+	} else {
+		return "Fail"
+	}
+}
+
 func (gc *GradeCalculator) AddGrade(name string, grade int, gradeType GradeType) {
 	gc.grades = append(gc.grades, Grade{
 		Name:  name,
